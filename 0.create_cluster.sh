@@ -32,6 +32,7 @@ EOF
 kind create cluster \
   --wait 5m \
   --config KindClusterConfig.yaml
+rm -f KindClusterConfig.yaml
 # install nginx ingress
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 kubectl wait --namespace ingress-nginx \
