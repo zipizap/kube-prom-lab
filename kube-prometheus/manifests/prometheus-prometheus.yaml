@@ -10,12 +10,12 @@ metadata:
   name: k8s
   namespace: monitoring
 spec:
-  alerting:
-    alertmanagers:
-    - apiVersion: v2
-      name: alertmanager-main
-      namespace: monitoring
-      port: web
+  version: 2.41.0
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: prometheus-k8s  
   enableFeatures: []
   externalLabels: {}
   image: quay.io/prometheus/prometheus:v2.41.0
@@ -28,21 +28,32 @@ spec:
       app.kubernetes.io/name: prometheus
       app.kubernetes.io/part-of: kube-prometheus
       app.kubernetes.io/version: 2.41.0
-  podMonitorNamespaceSelector: {}
-  podMonitorSelector: {}
-  probeNamespaceSelector: {}
-  probeSelector: {}
   replicas: 2
   resources:
     requests:
       memory: 400Mi
-  ruleNamespaceSelector: {}
-  ruleSelector: {}
-  securityContext:
-    fsGroup: 2000
-    runAsNonRoot: true
-    runAsUser: 1000
-  serviceAccountName: prometheus-k8s
+  
+  ## serviceMonitor selectors: which ones will be picked-up by this prometheus instance?
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
-  version: 2.41.0
+
+  ## podMonitor selectors: which ones will be picked-up by this prometheus instance?
+  podMonitorNamespaceSelector: {}
+  podMonitorSelector: {}
+  
+  ## probe selectors: which ones will be picked-up by this prometheus instance?
+  probeNamespaceSelector: {}
+  probeSelector: {}
+  
+  ## prometheusRule selectors: which ones will be picked-up by this prometheus instance?
+  ruleNamespaceSelector: {}
+  ruleSelector: {}
+
+  # which alertmanager instances will this prometheus instance connect to
+  alerting:
+    alertmanagers:
+    - apiVersion: v2
+      name: alertmanager-main
+      namespace: monitoring
+      port: web
+

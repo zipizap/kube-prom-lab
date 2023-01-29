@@ -11,4 +11,4 @@ set -xefu
 #   --set replicaCount=2 \
 #   --set serviceMonitor.enabled=true 
 
-kubectl apply -f podinfo.yaml
+kubectl apply -f podinfo-servmon.yaml
