@@ -29,7 +29,7 @@ portfwd_in_background() {
 # + Grafana        http://localhost:3000    login: admin // admin
 # 
 # Port-forwarding running in background. Terminate it manually with:
-#   kill #9 $PORTFWD_PROMETHEUS_PID $PORTFWD_ALERTMANAGER_PID $PORTFWD_GRAFANA_PID
+#   kill -9 $PORTFWD_PROMETHEUS_PID $PORTFWD_ALERTMANAGER_PID $PORTFWD_GRAFANA_PID
 #
 #
 ######################################################################
