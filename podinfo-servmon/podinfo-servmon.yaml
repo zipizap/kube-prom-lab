@@ -13,15 +13,16 @@ metadata:
     app.kubernetes.io/name: podinfo-servmon
 spec:
   endpoints:
-    - path: /metrics
-      # pod port name
-      port: http
-      interval: 15s
-  # filter namespace
+  - path: /metrics
+    # pod port name
+    port: http
+    interval: 15s
+  # filter service namespace
   namespaceSelector:
-    matchNames:
-      - podinfo-servmon
-  # filter service
+    any: true
+    # matchNames:
+    # - podinfo-servmon
+  # filter service labels
   selector:
     matchLabels:
       app.kubernetes.io/name: podinfo-servmon

@@ -38,7 +38,7 @@ EOF
   kubectl wait --namespace ingress-nginx \
     --for=condition=ready pod \
     --selector=app.kubernetes.io/component=controller \
-    --timeout=90s
+    --timeout=240s
   cat <<EOT
 #############################################
 #  dockerHost:10080  -> k8s-ingress:80
@@ -68,6 +68,7 @@ install_kubeprometheus() {
     --namespace=monitoring
   kubectl apply -f manifests/
   sleep 160
+  cd ..
 }
 
 
