@@ -5,6 +5,11 @@
 
 - store slack-webhook-url in a k8s secret, that alertmanagerconfig will latter use
   ```
-  kubectl create secret generic -n podinfo-servmon slack-receiver --from-literal=apiURL=https://hooks.slack.com/services/xxxxxxxxx/yyyyyyyy/zzzzzzzzzzzzzz
-  
+  cat <<'EOT' > create.secret.slack-receiver.sh
+  kubectl create secret generic -n podinfo-servmon slack-receiver --from-literal=apiURL=https://hooks.slack.com/services/xxxx/yyyy/zzzzzzzzz
+  EOT
   ```
+  NOTE: `create.secret.slack-receiver.sh` is gitignore'd
+
+- With this configuration done we can create a new cluster which will launch the podinfo-servmon configuration (including the secret) `cd .. && ./0.newClusterKubePromStack.sh`
+
