@@ -12,3 +12,4 @@ set -xefu
 #   --set serviceMonitor.enabled=true 
 
 kubectl apply -f podinfo-servmon.yaml
+./create.secret.slack-receiver.sh
